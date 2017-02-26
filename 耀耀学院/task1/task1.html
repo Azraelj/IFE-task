@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Task1</title>
+	<style>
+		.container{
+			position:absolute;
+			margin:auto;
+			top:0;
+			left:0;
+			right:0;
+			bottom:0;
+			height:100px;
+			width:350px;
+			text-align:center;
+		}
+		input{
+			border:1px solid #aaa;
+			border-radius:5px;
+			margin-left:10px;
+			height:30px;
+			font-size:18px;
+		}
+		button{
+			border:none;
+			border-radius:5px;
+			background:#2F79BA;
+			color:#fff;
+			height:30px;
+			font-weight:bold;
+		}
+		#tips{
+			color:#aaa;
+			font-weight:bold;
+			margin-top:10px;
+			font-size:14px;
+			text-align:left;
+			padding-left:60px;
+		}
+	</style>
+ </head>
+ <body>
+  <div class="container">
+		名称<input type="text" id="userName">
+		<button id="btn">验证</button>
+		<br>
+		<div id="tips">必填，长度为4~16个字符</div>
+	</div>
+	<script>
+		(function(){
+			var btn=document.getElementById("btn");
+			btn.onclick=vali;
+			function vali(){
+				var userName=document.getElementById("userName");
+				var str=userName.value;
+				var div=document.getElementById("tips");
+				var reg1=/[^\x00-\xff]/g;                         //匹配双字节字符
+				var reg2=/^[^\s]+$/g;                             
+				String.prototype.len=function(){                  //计算字符串长度
+					return this.replace(reg1,"aa").length; 
+				}
+				if(reg2.test(str)){                               //排除空格
+					if(str.len()>=4&&str.len()<=16){                //字符串长度符合4~16        
+						div.innerHTML="名称格式正确";
+						div.style.color="#60BA49";
+						userName.style.borderColor="#60BA49";
+					}else{                                          //字符串长度不符合要求
+						div.innerHTML="名称长度为4~16个字符";
+						div.style.color="#DE000F";
+						userName.style.borderColor="#DE000F"
+					}
+						
+				}else if(str.len()==0){                           //空字符串
+					div.innerHTML="姓名不能为空";
+					div.style.color="#DE000F";
+					userName.style.borderColor="#DE000F";
+				}else if(!reg2.test(str)){                         //含空格
+					div.innerHTML="名称不能含有空格";
+					div.style.color="#DE000F";
+					userName.style.borderColor="#DE000F";
+				}
+					
+				
+			}
+		})();
+	</script>
+ </body>
+</html>
