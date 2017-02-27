@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+	<style>
+			.container{
+			position:absolute;
+			margin:auto;
+			top:0;
+			left:0;
+			right:0;
+			bottom:0;
+			width:350px;
+			text-align:center;
+		}
+		span{
+			float:left;
+			text-align:right;
+			width:80px;
+			line-height:30px;
+		}
+		input{
+			border:1px solid #aaa;
+			border-radius:5px;
+			height:30px;
+			font-size:18px;
+			margin-bottom:10px;
+		}
+		button{
+			border:none;
+			border-radius:5px;
+			background:#2F79BA;
+			color:#fff;
+			height:30px;
+			font-weight:bold;
+		}
+		.tips{
+			color:#aaa;
+			font-weight:bold;
+			margin-bottom:10px;
+			font-size:14px;
+			text-align:left;
+			padding-left:110px;
+			display:none;
+		}
+		.submit{
+			text-align:right;
+			margin:10px;
+			padding-right:10px;
+		}
+	</style>
+ </head>
+ <body>
+  <div class="container">
+		<span>名称</span><input type="text" id="userName">
+		<div class="tips">必填，长度为4~16个字符</div>
+		<span>密码</span><input type="password" id="pwd">
+		<div class="tips">必填，4~16个字母或数字组合</div>
+		<span>密码确认</span><input type="password" id="pwdConfirm">
+		<div class="tips">请确认密码</div>
+		<span>邮箱</span><input type="email" id="email">
+		<div class="tips">必填，xxx@xxx.com</div>
+		<span>手机</span><input type="tel" id="mobile">
+		<div class="tips">必填，11位数字</div>
+		<div class="submit">
+			<button id="btn">提交</button>
+		</div>
+		
+	</div>
+	<script>
+		(function(){
+			var input=document.getElementsByTagName("input");
+			var tips=document.getElementsByClassName("tips");
+			var btn=document.getElementById("btn");
+			for(var i=0,len=input.length;i<len;i++){
+				(function(){
+					var j=i;
+					input[i].onfocus=tip;
+					function tip(){
+						tips[j].style.display="block";
+					}
+					input[i].onblur=valithis.bind(this,j);
+					var vali={
+						vali0(){
+							var userName=document.getElementById("userName");
+							var str=userName.value;
+							var reg1=/[^\x00-\xff]/g;                         //匹配双字节字符
+							var reg2=/^[^\s]+$/g;                             
+							String.prototype.len=function(){                  //计算字符串长度
+								return this.replace(reg1,"aa").length; 
+							}
+							if(reg2.test(str)){                               //排除空格
+								if(str.len()>=4&&str.len()<=16){                //字符串长度符合4~16        
+									tips[j].innerHTML="名称格式正确";
+									tips[j].style.color="#60BA49";
+									userName.style.borderColor="#60BA49";
+								}else{                                          //字符串长度不符合要求
+									tips[j].innerHTML="名称长度为4~16个字符";
+									tips[j].style.color="#DE000F";
+									userName.style.borderColor="#DE000F"
+								}
+						
+							}else if(str.len()==0){                           //空字符串
+								tips[j].innerHTML="姓名不能为空";
+								tips[j].style.color="#DE000F";
+								userName.style.borderColor="#DE000F";
+							}else if(!reg2.test(str)){                         //含空格
+								tips[j].innerHTML="名称不能含有空格";
+								tips[j].style.color="#DE000F";
+								userName.style.borderColor="#DE000F";
+							}
+					
+						},
+						vali1(){
+							var pwd=document.getElementById("pwd");
+							var str=pwd.value;
+							var reg=/^[a-zA-Z0-9]{4,16}$/
+							if(reg.test(str)){
+								tips[j].innerHTML="密码可用";
+								tips[j].style.color="#60BA49";
+								pwd.style.borderColor="#60BA49";
+							}else{
+								tips[j].innerHTML="请输入4~16位数字或字母组合";
+								tips[j].style.color="#DE000F";
+								pwd.style.borderColor="#DE000F"
+							}
+						},
+						vali2(){
+							var pwd=document.getElementById("pwdConfirm");
+							var str=pwdConfirm.value;
+							var right=document.getElementById("pwd").value;
+							if(str===right){
+								if(str!==""){
+									tips[j].innerHTML="密码正确";
+									tips[j].style.color="#60BA49";
+									pwdConfirm.style.borderColor="#60BA49";
+								}else{
+									tips[j].innerHTML="请输入密码";
+									tips[j].style.color="#DE000F";
+									pwdConfirm.style.borderColor="#DE000F"
+								}
+							}else{
+								tips[j].innerHTML="密码不一致";
+								tips[j].style.color="#DE000F";
+								pwdConfirm.style.borderColor="#DE000F"
+							}
+						},
+						vali3(){
+							var email=document.getElementById("email");
+							var str=email.value;
+							var reg=/^\w+([\.-]?\w+)*@\w+\1*(\.\w{2,3})+$/;
+							if(reg.test(str)){
+								tips[j].innerHTML="邮箱可用";
+								tips[j].style.color="#60BA49";
+								email.style.borderColor="#60BA49";
+							}else{
+								tips[j].innerHTML="邮箱格式错误";
+								tips[j].style.color="#DE000F";
+								email.style.borderColor="#DE000F";
+							}
+						},
+						vali4(){
+							var mobile=document.getElementById("mobile");
+							var str=mobile.value;
+							var reg=/^1[3578]\d{9}$/
+							if(reg.test(str)){
+								tips[j].innerHTML="手机号可用";
+								tips[j].style.color="#60BA49";
+								mobile.style.borderColor="#60BA49";
+							}else{
+								tips[j].innerHTML="请输入正确的手机号";
+								tips[j].style.color="#DE000F";
+								mobile.style.borderColor="#DE000F";
+							}
+						},
+					}
+					function valithis(a){
+						vali["vali"+a]();
+					}
+				
+					btn.addEventListener("click",function(){
+						tips[j].style.display="block";
+						vali["vali"+j]();
+					})
+				})();
+			}
+		
+			btn.addEventListener("click",function(){
+				for(var j=0,count=0,leng=tips.length;j<leng;j++){
+					var x=(function(){
+						var k=j;
+						if(tips[k].style.color=="rgb(96, 186, 73)"){
+							count++;
+						}
+						return count;
+					})();	
+				}
+				if(x==5)
+					alert("验证成功");
+				else
+					alert("验证失败");
+			})
+		})();
+	</script>
+ </body>
+</html>

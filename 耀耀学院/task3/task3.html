@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Task3</title>
+		<meta charset="utf-8">
+		<style>
+			.container{
+				width:500px;
+				height:200px;
+				position:absolute;
+				top:0;
+				left:0;
+				right:0;
+				bottom:0;
+				margin:auto;
+				text-align:center;
+			}
+			#out{
+				margin-left:120px;
+			}
+			.divs{
+				margin-top:20px;
+			}
+			select{
+				margin:0 10px;
+			}
+			#city{
+				width:80px;
+			}
+			#university{
+				width:200px;
+			}
+			.hide{
+				display:none;
+			}
+			#company{
+				width:300px;
+				margin-left:30px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<input type="radio" name="rad" value="0" id="in" checked>在校生
+			<input type="radio" name="rad" value="1" id="out">非在校生
+			<div class="divs">
+				学校
+				<select name="city" id="city">
+					<option value="11">北京</option>
+					<option value="12">天津</option>
+					<option value="13">上海</option>
+				</select>
+				<select name="school" id="university">
+					<option value="1">北京大学</option>
+					<option value="2">清华大学</option>
+					<option value="3">人民大学</option>
+				</select>
+			</div>
+			<div class="divs hide">
+				就业单位<input type="text" id="company">
+			</div>
+		</div>
+		<script>
+			(function(){
+				var inSchool=document.getElementById("in");
+				var outSchool=document.getElementById("out");
+				var city=document.getElementById("city");
+				var university=document.getElementById("university");
+				var div=document.querySelectorAll(".divs");
+				inSchool.onchange=check;
+				outSchool.onchange=check;
+				function check(){
+					if(inSchool.checked){
+						div[0].style.display="block";
+						div[1].style.display="none";
+					}else{
+						div[0].style.display="none";
+						div[1].style.display="block";
+					}
+				}
+				var schools=[
+					[{name:"北京大学",value:1},
+					{name:"清华大学",value:2},
+					{name:"人民大学",value:3}],
+					[{name:"南开大学",value:4},
+					{name:"天津大学",value:5}],
+					[{name:"复旦大学",value:6},
+					{name:"交通大学",value:7}],
+				]
+				city.onchange=tab;
+				function tab(){
+					var i=this.selectedIndex;//获取选中项下标
+					var school=schools[i];
+					university.innerHTML="";//清空学校列表
+					for(var j=0;j<school.length;j++){//生成学校列表内容
+						university.add(new Option(school[j].name,school[j].value));
+					}
+				
+					
+				}
+				
+
+			})();
+		</script>
+	</body>
+</html>
