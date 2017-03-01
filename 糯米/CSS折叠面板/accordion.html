@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<style>
+			label,input,a{
+				display:block;
+				width:800px;
+				border:1px solid #aaa;
+				margin:0 auto;
+			}
+			input,a{
+				height:50px;
+				position:relative;
+			}
+			a{
+				box-sizing:border-box;
+				text-decoration:none;
+				color:orange;
+				font-size:30px;
+				font-weight:bold;
+				background:#2683C5;
+				line-height:38px;
+				padding:5px 20px;
+			}
+			/*隐藏单选按钮*/
+			input{
+				margin-top:-50px;
+				opacity:0;
+				cursor:pointer;
+			}
+			label{
+				box-sizing:border-box;
+				border-width:0;
+				height:0;
+				overflow:hidden;
+				transition:all 0.5s linear;
+			}
+			/* 设置每个单选按钮选中时相邻label的样式 */
+			input:checked + label{
+				height:150px;
+				border-width:1px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="box">
+			<a href="">标题一</a>
+			<input type="radio" name="rad" id="rad1">
+			
+			<label for="rad1"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus asperiores quisquam iusto odio dolores! Enim amet ex id ab incidunt libero illo reprehenderit mollitia praesentium esse asperiores soluta deleniti. Debitis?</span>
+			<span>Itaque placeat vero blanditiis cum odio error rerum commodi nesciunt voluptatem culpa voluptatibus suscipit! Tempora quam numquam ipsa neque debitis necessitatibus provident doloribus. Rem odit aliquam porro harum tenetur id!</span>
+			<span>Consequatur consequuntur hic nobis natus eius labore aliquid suscipit odit libero unde. Tenetur porro voluptas optio odit incidunt accusamus explicabo laboriosam perspiciatis aperiam impedit perferendis modi error saepe adipisci praesentium.</span></label>
+			<a href="">标题二</a>
+			<input type="radio" name="rad" id="rad2">
+			
+			<label for="rad2"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus reprehenderit eligendi porro rerum accusantium dolor? Commodi cum ducimus omnis exercitationem vel eius laborum nam in blanditiis sit maxime nemo laudantium?</span>
+			<span>Officia blanditiis libero non facilis expedita quidem autem fugiat natus inventore voluptates pariatur doloremque accusantium atque assumenda distinctio impedit accusamus. Sunt nobis rem eius id doloribus consectetur labore libero earum!</span>
+			<span>Quasi quaerat modi ullam facilis libero repudiandae minus veritatis dolorem eligendi molestiae! At maiores consequuntur exercitationem alias et laboriosam deserunt voluptate natus illum quas hic dolor quis saepe aspernatur eaque!</span></label>
+			<a href="">标题三</a>
+			<input type="radio" name="rad" id="rad3">
+			
+			<label for="rad3"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente voluptatum assumenda reprehenderit magni. Ducimus enim blanditiis vel inventore officiis natus odit repellendus autem in esse magni modi est corporis voluptatum!</span>
+			<span>Magnam incidunt libero tempora porro vitae obcaecati deserunt commodi voluptatibus esse animi voluptate nisi laborum eaque! Suscipit quaerat perspiciatis excepturi facilis facere illum aperiam libero error distinctio ex. Ex tempora.</span>
+			<span>Assumenda perferendis quidem optio voluptatum nesciunt incidunt vero fugit mollitia odio totam culpa eius ad dicta delectus vitae consequuntur minima aperiam temporibus eos distinctio. Iusto odio ut quasi beatae eos.</span></label>
+		</div>
+	</body>
+</html>
