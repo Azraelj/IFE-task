@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<style>
+			.container{
+				width:1000px;
+				height:800px;
+				perspective:2000px;
+				position:absolute;
+				top:0;
+				right:0;
+				left:0;
+				bottom:0;
+				margin:auto;
+			
+			}
+			.box{
+				width:1000px;
+				height:800px;
+				transform-style:preserve-3d;
+/*				transition:all 2s linear;*/
+			}
+	
+			.content{
+				width:350px;
+				height:250px;
+				background:red;
+				position:absolute;
+				top:0;
+				right:0;
+				left:0;
+				bottom:0;
+				margin:auto;
+				
+			}
+			.d1{
+				-webkit-transform:translatez(500px);
+				-moz-transform:translatez(500px);
+				-o-transform:translatez(500px);
+				-ms-transform:translatez(500px);
+				transform:translatez(500px);
+				background-image:url("1.jpg");
+				background-size:100% 100%;
+			}
+			.d2{
+				-webkit-transform:rotatey(60deg) translatez(500px);
+				-moz-transform:rotatey(60deg) translatez(500px);
+				-o-transform:rotatey(60deg) translatez(500px);
+				-ms-transform:rotatey(60deg) translatez(500px);
+				transform:rotatey(60deg) translatez(500px);
+				background-image:url("2.jpg");
+				background-size:100% 100%;
+
+			}
+			.d3{
+				-webkit-transform:rotatey(120deg) translatez(500px);
+				-moz-transform:rotatey(120deg) translatez(500px);
+				-o-transform:rotatey(120deg) translatez(500px);
+				-ms-transform:rotatey(120deg) translatez(500px);
+				transform:rotatey(120deg) translatez(500px);
+				background-image:url("3.jpg");
+				background-size:100% 100%;
+			}
+			.d4{
+				-webkit-transform:rotatey(180deg) translatez(500px);
+				-moz-transform:rotatey(180deg) translatez(500px);
+				-o-transform:rotatey(180deg) translatez(500px);
+				-ms-transform:rotatey(180deg) translatez(500px);
+				transform:rotatey(180deg) translatez(500px);
+				background-image:url("5.jpg");
+				background-size:100% 100%;
+			}
+			.d5{
+				-webkit-transform:rotatey(240deg) translatez(500px);
+				-moz-transform:rotatey(240deg) translatez(500px);
+				-o-transform:rotatey(240deg) translatez(500px);
+				-ms-transform:rotatey(240deg) translatez(500px);
+				transform:rotatey(240deg) translatez(500px);
+				background-image:url("8.jpg");
+				background-size:100% 100%;
+			}
+			.d6{
+				-webkit-transform:rotatey(300deg) translatez(500px);
+				-moz-transform:rotatey(300deg) translatez(500px);
+				-o-transform:rotatey(300deg) translatez(500px);
+				-ms-transform:rotatey(300deg) translatez(500px);
+				transform:rotatey(300deg) translatez(500px);
+				background-image:url("10.jpg");
+				background-size:100% 100%;
+			}
+			.blur{
+				-webkit-filter:blur(5px);
+				filter:blur(5px);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="box">
+				<div class="content d1"></div>
+				<div class="content d2"></div>
+				<div class="content d3 blur"></div>
+				<div class="content d4 blur"></div>
+				<div class="content d5 blur"></div>
+				<div class="content d6"></div>
+			</div>
+		</div>
+		<script>
+			(function(){
+				var box=document.getElementsByClassName("box")[0];
+				var deg=0;
+				var divs=document.getElementsByClassName("content");
+				var cls=[];
+				for(var i=0;i<divs.length;i++){
+					cls.push(divs[i].style.className);
+				}
+				var clear=[divs[1],divs[0],divs[5]],blur=[divs[4],divs[3],divs[2]];
+				function rotate(time){
+					deg+=1;
+					box.style.transform="rotateY("+deg+"deg)";
+					if(deg%60==30){
+						blur.push(clear.shift());
+						clear.push(blur.shift());
+							blur[blur.length-1].className+=" blur";
+							var idx=clear[clear.length-1].className.lastIndexOf("blur");
+							if(idx!=-1)
+								clear[clear.length-1].className=clear[clear.length-1].className.slice(0,idx-1);
+					}
+					var animate=requestAnimationFrame(rotate);
+					if(deg%60==0){
+						cancelAnimationFrame(animate);
+						setTimeout(rotate,1000)
+					}
+				}
+				requestAnimationFrame(rotate);
+				
+			})();
+		</script>
+	</body>
+</html>

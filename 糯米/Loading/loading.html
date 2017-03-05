@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Loading</title>
+	<style type="text/css">
+		.loading{
+			width: 100px;
+			height: 100px;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			margin: auto;
+			border-radius: 50%;
+			background-color: #FB8BBD;
+			background-image: -webkit-linear-gradient(left,#FF298C 50%,transparent 0);
+			background-image: linear-gradient(to right,#FF298C 50%,transparent 0);
+		}
+		/*半圆遮罩*/
+		.loading:before{
+			content: '';
+			display: block;
+			width: 50px;
+			height: 100px;
+			border-radius: 100% 0 0 100%/50%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			background-color: inherit;
+			-webkit-transform-origin: right center;
+			        transform-origin: right center; 
+			-webkit-animation:rotate .5s linear infinite,color 1s step-end infinite;
+			        animation:rotate .5s linear infinite,color 1s step-end infinite;
+		}
+		/*外层边框*/
+		.loading:after{
+			content: '';
+			display: block;
+			width: 150px;
+			height: 150px;
+			position: absolute;
+			top: -25px;
+			left: -25px;
+			border:2px solid #FF298C;
+			border-left-color: transparent;
+			border-radius:50%;
+			-webkit-animation:border 1s linear infinite;
+			        animation:border 1s linear infinite;
+		}
+		@-webkit-keyframes border{
+			to{
+				-webkit-transform: rotate(-360deg);
+				        transform: rotate(-360deg);
+			}
+		}
+		@keyframes border{
+			to{
+				-webkit-transform: rotate(-360deg);
+				        transform: rotate(-360deg);
+			}
+		}	
+		@-webkit-keyframes rotate{
+			to{
+				-webkit-transform: rotate(-180deg);
+				        transform: rotate(-180deg);
+			}
+		}	
+		@keyframes rotate{
+			to{
+				-webkit-transform: rotate(-180deg);
+				        transform: rotate(-180deg);
+			}
+		}
+		/*遮罩层变色*/
+		@-webkit-keyframes color{
+			50%{
+				background-color: #FF298C;
+			}
+		}
+		@keyframes color{
+			50%{
+				background-color: #FF298C;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="loading"></div>
+</body>
+</html>
